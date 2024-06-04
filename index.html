@@ -21,25 +21,25 @@
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 500px;
-        height: 300px;
-        align-items: center;
-        align-content: center;
+        width: 90%;
+        max-width: 500px;
+        box-sizing: border-box;
+        text-align: center;
     }
     select, input[type="number"], button {
-        margin: 5px;
+        margin: 10px 0;
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;
         font-weight: bold; 
-        font-size: 16px; 
+        font-size: 16px;
+        width: 100%;
+        box-sizing: border-box;
     }
     button {
         background-color: #007bff;
         color: #fff;
         cursor: pointer;
-        width: 150px; 
-        align-content: center;
     }
     .spinner {
         display: none;
@@ -49,13 +49,13 @@
         width: 30px;
         height: 30px;
         animation: spin 1s linear infinite;
+        margin: 10px auto;
     }
     @keyframes spin {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
 </style>
-
 </head>
 <body>
 <div class="converter">
@@ -92,7 +92,6 @@
     const amount = document.getElementById("amount").value;
     const url = `https://api.exchangerate-api.com/v4/latest/${fromCurrency}`;
     
-   
     document.getElementById("spinner").style.display = "block";
 
     fetch(url)
@@ -102,10 +101,12 @@
         const convertedAmount = amount * conversionRate;
         document.getElementById("convertedAmount").value = convertedAmount.toFixed(2);
         
-        
         document.getElementById("spinner").style.display = "none";
       })
-      .catch(error => console.error('Error:', error));
+      .catch(error => {
+        console.error('Error:', error);
+        document.getElementById("spinner").style.display = "none";
+      });
   }
 </script>
 </body>
